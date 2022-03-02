@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CCS\" />
+    <Compile Remove="CCS\**" />
+    <EmbeddedResource Remove="CCS\**" />
+    <None Remove="CCS\**" />
   </ItemGroup>
 
   <ItemGroup>

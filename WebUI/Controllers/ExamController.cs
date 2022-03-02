@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebUI.Helpers;
 
 namespace WebUI.Controllers
 {
@@ -6,6 +7,10 @@ namespace WebUI.Controllers
     {
         public IActionResult Index()
         {
+            if(AuthHelper.IsAuthenticated())
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             return View();
         }
     }

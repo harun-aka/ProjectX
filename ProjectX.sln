@@ -11,11 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{B2BE6902-B4CC-4898-A615-0CD036103018}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{3D126B7B-80FB-4CF9-88E1-A428D6C06EAC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj", "{C8311137-A914-4801-B494-B942E395C88C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{217AD1F2-7292-4389-A4C5-FB8C7FF97D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrations", "Migrations\Migrations.csproj", "{217AD1F2-7292-4389-A4C5-FB8C7FF97D53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +37,6 @@ Global
 		{B2BE6902-B4CC-4898-A615-0CD036103018}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2BE6902-B4CC-4898-A615-0CD036103018}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2BE6902-B4CC-4898-A615-0CD036103018}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D126B7B-80FB-4CF9-88E1-A428D6C06EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D126B7B-80FB-4CF9-88E1-A428D6C06EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D126B7B-80FB-4CF9-88E1-A428D6C06EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D126B7B-80FB-4CF9-88E1-A428D6C06EAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8311137-A914-4801-B494-B942E395C88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8311137-A914-4801-B494-B942E395C88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8311137-A914-4801-B494-B942E395C88C}.Release|Any CPU.ActiveCfg = Release|Any CPU

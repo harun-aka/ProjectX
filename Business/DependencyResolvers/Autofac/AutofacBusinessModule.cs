@@ -18,13 +18,17 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
+
+            builder.RegisterType<ExamManager>().As<IExamService>().SingleInstance();
             builder.RegisterType<EfExamDal>().As<IExamDal>().SingleInstance();
 
+            builder.RegisterType<AnswerManager>().As<IAnswerService>().SingleInstance();
             builder.RegisterType<EfAnswerDal>().As<IAnswerDal>().SingleInstance();
 
+            builder.RegisterType<ArticleManager>().As<IArticleService>().SingleInstance();
             builder.RegisterType<EfArticleDal>().As<IArticleDal>().SingleInstance();
 
+            builder.RegisterType<QuestionManager>().As<IQuestionService>().SingleInstance();
             builder.RegisterType<EfQuestionDal>().As<IQuestionDal>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>();

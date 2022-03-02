@@ -33,7 +33,7 @@ namespace Business.Concrete
 
         public IDataResult<Article> GetArticle(int id)
         {
-            return new SuccessDataResult<Article>(_articleDal.Get(a => a.Id == id), Messages.ArticleListed);
+            return new SuccessDataResult<Article>(_articleDal.Get(a => a.ArticleId == id), Messages.ArticleListed);
         }
     }
 }

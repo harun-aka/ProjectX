@@ -12,7 +12,7 @@ namespace Business.Abstract
     public interface IExamService
     {
         IResult SaveExam(ExamDto exam);
-        IDataResult<List<ExamDto>> GetAll();
+        IDataResult<List<ExamListDto>> GetAll();
         IResult Delete(int id);
         IDataResult<ExamDto> Get(int id);
         IDataResult<Answer> GetAnswer(int id);
