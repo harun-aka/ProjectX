@@ -9,7 +9,7 @@ namespace WebUI.Helpers
 
         public static bool IsAuthenticated()
         {
-            if (string.IsNullOrEmpty(_httpContextAccessor.HttpContext.Session.GetString("Authentication")))
+            if (string.IsNullOrWhiteSpace(_httpContextAccessor.HttpContext.Session.GetString("Authentication")))
             {
                 return false;
             }
