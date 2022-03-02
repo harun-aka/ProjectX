@@ -31,7 +31,6 @@ namespace Business.Concrete
         }
 
         [TransactionScopeAspect]
-        [SecuredOperation("admin")]
 
         public IResult Delete(int id)// Soruları ve cevapları da sil
         {
@@ -45,7 +44,6 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ExamDeleted);
         }
 
-        [SecuredOperation("admin")]
         [TransactionScopeAspect]
         public IResult Add(Exam exam)
         {
@@ -53,26 +51,22 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ExamAdded);
         }
 
-        [SecuredOperation("user, admin")]
         public IDataResult<ExamDto> Get(int id)
         {
             return new SuccessDataResult<ExamDto>(_examDal.GetExamDetail(id), Messages.ExamListed);
         }
 
-        [SecuredOperation("user, admin")]
         public IDataResult<Answer> GetAnswer(int id)
         {
             throw new NotImplementedException();
         }
 
-        [SecuredOperation("user, admin")]
         public IDataResult<List<ExamListDto>> GetAll()
         {
             return new SuccessDataResult<List<ExamListDto>>(_examDal.GetExamListDetails(), Messages.ExamsListed);
         }
 
         [TransactionScopeAspect]
-        [SecuredOperation("admin")]
         public IResult SaveExam(ExamDto examDto)
         {
             IResult result = BusinessRules.Run(CheckAllQuestionsCreated(examDto));

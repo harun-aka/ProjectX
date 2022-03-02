@@ -7,7 +7,7 @@ namespace WebUI.Controllers
     {
         public IActionResult Index()
         {
-            if(AuthHelper.IsAuthenticated())
+            if(!AuthHelper.IsAuthenticated())
             {
                 return RedirectToAction("Login", "Auth");
             }
