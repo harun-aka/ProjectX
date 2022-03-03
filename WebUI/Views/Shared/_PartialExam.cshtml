@@ -1,7 +1,7 @@
 ﻿@using Entities.DTOs
 @model ExamDto
 
-<link href="~/Content/user.css" rel="stylesheet" />
+<link href="~/css/user.css" rel="stylesheet" />
 <div class="row">
 
     <div class="col-md-12">
@@ -24,7 +24,7 @@
                         <div class="row form-group">
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon" id="sizing-addon1">Soru @(i+1)</span>
-                                <input type="text" class="form-control" name="Exam.Questions[@i].Content" placeholder="Lütfen @(i+1) . soruyu giniz" aria-describedby="sizing-addon1" required="required">
+                                <input type="text" class="form-control" name="Exam.Questions[@i].Text" placeholder="Lütfen @(i+1) . soruyu giniz" aria-describedby="sizing-addon1" required="required">
 
                                
                             </div>
@@ -36,7 +36,7 @@
 
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">A)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[0].Content" placeholder="Birinci cevabı giriniz " aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[0].Text" placeholder="First Answer " aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[0].IsRight" value="false" />
                                     </div>
@@ -45,7 +45,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">B)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[1].Content" placeholder="İkinci cevabı giriniz" aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[1].Text" placeholder="Second Answer " aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[1].IsRight" value="false" />
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">C)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[2].Content" placeholder="Üçüncü cevabı giriniz" aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[2].Text" placeholder="Third Answer" aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[2].IsRight" value="false" />
                                     </div>
@@ -63,7 +63,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">D)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[3].Content" placeholder="Dördüncü cevabı giriniz" aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[3].Text" placeholder="Fourth Answer" aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[3].IsRight" value="false" />
                                     </div>
@@ -73,7 +73,7 @@
                             <div class="row">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-6  ">
-                                    <button id="btn-@i" type="button" class="btn btn-block  ">Doğru Cevabı Seç</button>
+                                    <button id="btn-@i" type="button" class="btn btn-block  ">Choose Right Answer</button>
                                 </div>
 
                             </div>
