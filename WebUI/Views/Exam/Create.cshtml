@@ -1,33 +1,50 @@
-﻿@using Entities.DTOs
-@model ExamDto
+﻿@model Entities.DTOs.ExamDto
 
 @{
     ViewBag.Title = "Create";
 }
 
+
+
+
 <div class="col-12 ">
-    <h2 id="header">Choose Essay</h2>
+                         @if (ViewBag.Error != "" && ViewBag.Error != null)
+                        {
+                            if (ViewBag.Success != true)
+                            {
+                                <div class="row">
+                                    <div class="alert alert-danger">
+                                        <strong>@ViewBag.Error</strong>
+                                    </div>
+
+            </div>
+        }
+    }
+    else
+    {
+            <h2 id="header">Choose Subject For Exam</h2>
+    }
+
     <div id="exam-panel">
         <div id="title-list" class="list-group">
 
             @if (ViewBag.RSSFeed != null)
             {
-                List<RssModel> rssfeed = ViewBag.RSSFeed;
-                foreach (var item in rssfeed)
+                foreach (var item in ViewBag.RSSFeed)
                 {
                     <a data-title="@item.Title" class="list-group-item title-item">@item.Title</a>
                 }
             }
+
         </div>
     </div>
 </div>
-
-    <script language="JavaScript" type="text/javascript" src="~/js/jquery-1.10.2.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="~/js/modernizr-2.6.2.js"></script>
-    <script language="JavaScript" type="text/javascript" src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery-1.10.2.min.js"></script>
 <script>
 
-    $('.title-item').click(function() { 
+
+
+    $(".title-item").click(function () {
 
         var a = $(this).data("title");
         $(this).addClass("active");
@@ -35,6 +52,7 @@
 
         $("#title-list").html($(this));
         $.ajax({
+
             type: "post",
             url: '@Url.Action("GetExamCreateView", "Exam")',
             data: { title: a },
@@ -42,13 +60,19 @@
             success: function (data) {
                 if (data != null) {
 
+
                    var temp = $("#exam-panel").html();
                    var newDiv = temp + data;
                    $("#exam-panel").html(newDiv);
+
+
+
                 }
+
+
             },
             error: function () {
-                alert("İşlem Sırasında Hata Oluştu");
+                alert("Something Happened ):");
             }
 
         });

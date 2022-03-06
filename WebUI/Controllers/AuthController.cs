@@ -15,7 +15,7 @@ namespace WebUI.Controllers
             _authService = authService;
         }
 
-        public ActionResult Login()
+        public IActionResult Login()
         {
             return View(new UserForLoginDto());
         }
@@ -27,17 +27,17 @@ namespace WebUI.Controllers
             {
                 return View("Login");
             }
-            var userToLogin = _authService.Login(userForLoginDto);
-            if (!userToLogin.Success)
+            var resultLogin = _authService.Login(userForLoginDto);
+            if (!resultLogin.Success)
             {
-                ViewBag.Error = "Log in failed. " + userToLogin.Message;
+                ViewBag.Error = "Login failed. " + resultLogin.Message;
                 return View("Login");
             }
 
-            var result = _authService.CreateAccessToken(userToLogin.Data);
+            var result = _authService.CreateAccessToken(resultLogin.Data);
             if (!result.Success)
             {
-                ViewBag.Error = "Log in failed. " + result.Message;
+                ViewBag.Error = "Login failed. " + result.Message;
                 return View("Login");
             }
 
@@ -45,7 +45,7 @@ namespace WebUI.Controllers
             return RedirectToAction("Index", "Exam");
         }
 
-        public ActionResult Register()
+        public IActionResult Register()
         {
             return View(new UserForRegisterDto());
         }
@@ -73,11 +73,11 @@ namespace WebUI.Controllers
 
 
             ViewBag.Success = true;
-            ViewBag.Error = "User Created. Please Log In.";
+            ViewBag.Error = "User Created. Please Login.";
             return View("Login");
         }
 
-        public ActionResult Logout()
+        public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Auth");

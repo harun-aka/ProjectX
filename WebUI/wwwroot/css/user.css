@@ -3,22 +3,16 @@
   
 }
 
-#username{
-  width:100%;
+#email{
   border-style:solid;
   border-radius:initial;
 }
 
 #password{
-  width:100%;
   border-style:solid;
   border-radius:initial;
 }
 
-#btn_login{
-  width:100%;
-  background-color:transparent;
-}
 
 .column{
   margin-top:10px;

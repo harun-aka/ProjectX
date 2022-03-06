@@ -11,6 +11,6 @@ namespace Business.Abstract
     public interface IAnswerService
     {
         IResult Add(Answer answer);
-        IDataResult<List<Answer>> GetAnswersByQuestionId(int questionId);
+        IDataResult<Answer> Get(int answerId);
     }
 }

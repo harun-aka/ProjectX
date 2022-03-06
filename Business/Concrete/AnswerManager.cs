@@ -32,9 +32,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.AnswerAdded);
         }
 
-        public IDataResult<List<Answer>> GetAnswersByQuestionId(int questionId)
+        public IDataResult<Answer> Get(int answerId)
         {
-            return new SuccessDataResult<List<Answer>>(_answerDal.GetAll(a => a.QuestionId == questionId), Messages.AnswersListed);
+            return new SuccessDataResult<Answer>(_answerDal.Get(a => a.AnswerId == answerId));
         }
     }
 }

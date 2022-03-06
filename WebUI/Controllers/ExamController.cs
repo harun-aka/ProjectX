@@ -20,12 +20,13 @@ namespace WebUI.Controllers
             _examService = examService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? errorMessage)
         {
             if (!AuthHelper.IsAuthenticated())
             {
                 return RedirectToAction("Login", "Auth");
             }
+            ViewBag.Error = errorMessage;
 
             var result = _examService.GetAll();
             List<ExamListDto> list = new List<ExamListDto>();
@@ -62,7 +63,8 @@ namespace WebUI.Controllers
             var result = GetListRss();
             if(!result.Success)
             {
-                return null;
+                ViewBag.Error = "Failed" + result.Message;
+                return View();
             }
             ViewBag.RSSFeed = result.Data;
             return View();
@@ -73,13 +75,15 @@ namespace WebUI.Controllers
         {
             if (exam == null)
             {
-                return null;
+                ViewBag.Error = "Create Exam Failed.";
+                return View("Create");
             }
 
             var result = _examService.SaveExam(exam);
             if (!result.Success)
             {
-                return null;
+                ViewBag.Error = "Create Exam Failed. " + result.Message;
+                return View("Create");
             }
 
             return RedirectToAction("Index", "Exam");
@@ -134,7 +138,7 @@ namespace WebUI.Controllers
             var result = _examService.Delete(examId);
             if (!result.Success)
             {
-                return null;
+                return RedirectToAction("Index", "Exam", new { errorMessage = result.Message });
             }
             return RedirectToAction("Index", "Exam");
         }
@@ -168,19 +172,20 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CheckAnswer(int id, bool IsRight)
+        public JsonResult CheckAnswer(int answerId, bool IsRight)
         {
-            var result = _examService.GetAnswer(id);
+            var result = _examService.GetAnswer(answerId);
             if(!result.Success)
             {
-                return Json("null", System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                return new JsonResult(new { data = "null" });
             }
             Answer answer = result.Data;
             if (answer.IsRight == IsRight)
             {
-                return Json("true", System.Web.Mvc.JsonRequestBehavior.AllowGet);
+                return new JsonResult(new { data = "true" });
             }
-            return Json("false", System.Web.Mvc.JsonRequestBehavior.AllowGet);
+            return new JsonResult(new { data = "false" });
         }
+
     }
 }

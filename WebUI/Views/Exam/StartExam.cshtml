@@ -1,15 +1,28 @@
-﻿@using Entities.DTOs
-@model ExamDto
+﻿
+@model Entities.DTOs.ExamDto
 @{
     ViewBag.Title = "Sınav başladı";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/css/user.css" rel="stylesheet" />
+<script src="~/js/jquery-1.10.2.min.js"></script>
 <div class="row">
     <div class="col-md-12 ">
+         @if (ViewBag.Error != "" && ViewBag.Error != null)
+                        {
+                            if (ViewBag.Success != true)
+                            {
+                                <div class="row">
+                                    <div class="alert alert-danger">
+                                        <strong>@ViewBag.Error</strong>
+                                    </div>
+
+                                </div>
+                            }
+                        }
         <div class="row">
             <div class="col-12">
-                <h2 id="header">Aşağıdaki soruları paragrafa göre cevaplandırınız</h2>
+                <h2 id="header">Answer The Following Questions According To The Paragraph</h2>
             </div>
         </div>
         <div class="row">
@@ -35,14 +48,24 @@
                     @Html.HiddenFor(x => x.ExamId)
                     <div class="row form-group " id="panel-question">
                         @for (var i = 0; i < 4; i++)
-                        {                      
+                        {
+
+
+
+
+
+                            
                             <div class="col-md-6 form-group">
                    
                                 <div class="row form-group col-12 ">
                                     <div class="input-group input-group-lg ">
                                         <span class="input-group-addon" id="sizing-addon1">Soru @(i + 1)</span>
                                         @Html.TextBoxFor(x => x.Questions[i].Text, new { @class = "form-control", @readonly = "readonly" })
+
+
+
                                     </div>
+
                                 </div>
                                 <div class="row " id="answers-@i">
 
@@ -50,29 +73,48 @@
                                        }
                                        @for (int k = 0; k < 4; k++)
                                     {
-                                        @Html.HiddenFor(x => x.Questions[i].Answers[k].AnswerId, new { @id = "id-"+k })
+                                        @Html.HiddenFor(x => x.Questions[i].Answers[k].AnswerId, new { @id = "answerId-"+k })
                                         <div class="panel-answer-@i col-12 form-group ">
-
                                             <div class="input-group input-group-sm cevap-@k">
                                                 <span class="input-group-addon" id="sizing-addon1">@a[k])</span>
                                                 @Html.TextBoxFor(x => x.Questions[i].Answers[k].Text, new { @class = "form-control", @readonly = "readonly", @required = "required" })
                                                 @Html.HiddenFor(x => x.Questions[i].Answers[k].IsRight, new { @id = "IsRight-" + i })
+                                               
+
                                             </div>
+
                                         </div>
-                                    }                           
+                                    }
+                                    
+                                    
+
+
                                 </div>
+
+
                             </div>
+
+
+
                         }
                     </div>
                     <div class="row">
-                        <button class="btn btn-block btn-lg btn-primary " id="btn-complete" type="button">Complete Test</button>
+                        <button class="btn btn-block btn-lg btn-primary " id="btn-complete" type="button">Complete Exam</button>
+
+
                     </div>
                 </form>
+
+
+
+
+
             </div>
 
         </div>
     </div>
 </div>
+
 <script>
     
             
@@ -87,7 +129,6 @@
             $(".panel-answer-" + value).find(".cevap-" + deger).find("#IsRight-" + value).val("false");
         
         $(".panel-answer-" + value).click(function () {
-            debugger
             hiddenFalseByID(value);
             $("#answers-" + value).find(".grey").removeClass("grey");
             $(this).addClass("grey");
@@ -102,44 +143,40 @@
         });
         });
     });
-    $("#btn-complete").click(function () {
+    $("#btn-complete").click( function () {
         if ($(this).text() == "Sınavı Tamamla") {
             $(this).text("Sınav Bitti - Anasayfa ya dönmek için tıkla");
             $.each(["0", "1", "2", "3"], function (i, value) {
-
                 $(".panel-answer-" + value).removeClass("grey");
 
                 $.each(["0", "1", "2", "3"], function (k, deger) {
-                    debugger
                     var isRight = $(".panel-answer-" + value).find(".cevap-"+deger).find("#IsRight-"+value).val()
-                    var id = $("#answers-" + value).find("#id-"+deger).val();
+                    var id = $("#answers-" + value).find("#answerId-"+deger).val();
                     if (isRight=="true") {
-
                         $.ajax({
-
                             type: "post",
+                            async: false,
                             url: '@Url.Action("CheckAnswer", "Exam")',
-                            data: { id: id, IsRight:isRight},
+                            data: { answerId: id, IsRight:isRight},
                             datatype: "json",
                             success: function (data) {
                                 if (data != null) {
-                                    if (data == "true") {
-                                        debugger
-                            
-                                        var isRight = $(".panel-answer-" + value).find(".cevap-" + deger).parent().addClass("green");
-                               
+                                    var isTrue = data.data == "true";
+                                    var classToAdd = ""
+                                    if (isTrue) {
+                                       classToAdd = "green";
                                     }
-                                    if (data == "false") {
-                                        debugger
-                         
-                                        var isRight = $(".panel-answer-" + value).find(".cevap-" + deger).parent().addClass("red");                    
+                                    else {
+                                        classToAdd = "red";
                                     }
+                                   $(".panel-answer-" + value).children(".cevap-" + deger).parent(".panel-answer-" + value).addClass(classToAdd);
+                                    
+
                                 }
                             },
                             error: function () {
-                                alert("İşlem Sırasında Hata Oluştu");
+                                alert("Something Happened ):");
                             }
-
                         });
 
                     }
@@ -153,14 +190,6 @@
             window.location = '@Url.Action("Index", "Exam")';
         }
     });
-
-              
-  
-        
-
-
-
-
 
 
 </script>

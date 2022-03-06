@@ -1,6 +1,5 @@
-﻿@using Entities.DTOs
-
-@model UserForLoginDto
+﻿
+@model Entities.DTOs.UserForLoginDto
 @{
     Layout = null;
 }
@@ -13,41 +12,42 @@
     <title>Konuşarak Öğren</title>
 
     <link href="~/css/user.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-
-    <div class="row">
-        @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
-        {
-            <div class="col-md-8 ">
-
-                <div class="row justify-content-center">
-                    <div class="col-md-8  login_elements">
-                        <div>
-                            <h3>LOG IN</h3>
+    <div class="container">
+        <div class="row">
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+            {
+                <div class="col-md-8 col-md-offset-2" id="panel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="text-center">LOGIN</h1>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 column">
-                                <input class="input-lg" type="text" name="Email" placeholder="E-mail" id="email">
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger " })
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 login_elements">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="input-lg" type="text" name="Email" placeholder="E-mail" id="email">
+                                    <span>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger " })</span>   
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 column">
-                                <input class="input-lg" type="password" name="Password" placeholder="Password" id="password">
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="input-lg" type="password" name="Password" placeholder="Password" id="password">
+                                    <span>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger " })</span>   
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <a href="@Url.Action("Register","Auth")" class="btn btn-danger"><strong>Sign In</strong></a>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="@Url.Action("Register","Auth")" class="btn btn-default btn-lg"  ><strong>Register</strong></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-default btn-lg" type="submit" id="btn_login"><strong>Login</strong></button>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-primary" type="submit" id="btn_login"><strong>Log In</strong></button>
-                            </div>
-                        </div>
-                        @if (ViewBag.Error != "" && ViewBag.Error != null)
+                            @if (ViewBag.Error != "" && ViewBag.Error != null)
                         {
                             if (ViewBag.Success != true)
                             {
@@ -68,17 +68,15 @@
                                 </div>
                             }
                         }
-
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-
+            }
+        </div>
     </div>
-    <script language="JavaScript" type="text/javascript" src="~/js/jquery-1.10.2.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="~/js/jquery.validate.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="~/js/modernizr-2.6.2.js"></script>
-   
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 </body>

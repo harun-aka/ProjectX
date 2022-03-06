@@ -1,5 +1,4 @@
-﻿@using Entities.DTOs
-@model ExamDto
+﻿@model Entities.DTOs.ExamDto
 
 <link href="~/css/user.css" rel="stylesheet" />
 <div class="row">
@@ -8,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p>
-                    @Html.Raw(ViewBag.Rss.Description);
+                    @Html.Raw(ViewBag.Rss.Description)
                 </p>
 
             </div>
@@ -18,13 +17,13 @@
             for (var i = 0; i < 4; i++)
             {
                 <div class="row">
-                    <input type="hidden" name="Exam.Article.Content" value="@ViewBag.Rss.Description" />
+                    <input type="hidden" name="Exam.Article.Text" value="@ViewBag.Rss.Description" />
                     <input type="hidden" name="Exam.Article.Title" value="@ViewBag.Rss.Title" />
                     <div class="col-12 form-group">
                         <div class="row form-group">
                             <div class="input-group input-group-lg">
-                                <span class="input-group-addon" id="sizing-addon1">Soru @(i+1)</span>
-                                <input type="text" class="form-control" name="Exam.Questions[@i].Text" placeholder="Lütfen @(i+1) . soruyu giniz" aria-describedby="sizing-addon1" required="required">
+                                <span class="input-group-addon" id="sizing-addon1">Question @(i+1)</span>
+                                <input type="text" class="form-control" name="Exam.Questions[@i].Text" placeholder="Please enter the @(i+1) . question" aria-describedby="sizing-addon1" required="required">
 
                                
                             </div>
@@ -36,7 +35,7 @@
 
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">A)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[0].Text" placeholder="First Answer " aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[0].Text" placeholder="Please enter 1. answer " aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[0].IsRight" value="false" />
                                     </div>
@@ -45,7 +44,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">B)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[1].Text" placeholder="Second Answer " aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[1].Text" placeholder="Please enter 2. answer" aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[1].IsRight" value="false" />
                                     </div>
@@ -55,7 +54,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">C)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[2].Text" placeholder="Third Answer" aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[2].Text" placeholder="Please enter 3. answer" aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[2].IsRight" value="false" />
                                     </div>
@@ -63,7 +62,7 @@
                                 <div class="panel-answer-@i col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon1">D)</span>
-                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[3].Text" placeholder="Fourth Answer" aria-describedby="sizing-addon1" required="required">
+                                        <input type="text" class="form-control" name="Exam.Questions[@i].Answers[3].Text" placeholder="Please enter 4. answer" aria-describedby="sizing-addon1" required="required">
 
                                         <input type="hidden" name="Exam.Questions[@i].Answers[3].IsRight" value="false" />
                                     </div>
@@ -87,7 +86,7 @@
 
             <div class="row">
                 
-                    <button class="btn btn-block btn-lg btn-primary " type="submit">Sınavı Oluştur</button>
+                    <button class="btn btn-block btn-lg btn-primary " type="submit">Create Exam</button>
 
                
             </div>
@@ -96,7 +95,7 @@
         }
     </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/js/jquery-1.10.2.min.js"></script>
 <script>
 
     $.each(["0", "1", "2", "3"], function (i, value) {
@@ -106,7 +105,6 @@
 
 
             $(".panel-answer-" + value).click(function () {
-                debugger;
                 $("#answers-" + value + " .green").removeClass("green");
                 $(this).addClass("green");
               

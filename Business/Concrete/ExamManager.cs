@@ -58,7 +58,7 @@ namespace Business.Concrete
 
         public IDataResult<Answer> GetAnswer(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Answer>(_answerService.Get(id).Data);
         }
 
         public IDataResult<List<ExamListDto>> GetAll()
@@ -69,11 +69,11 @@ namespace Business.Concrete
         [TransactionScopeAspect]
         public IResult SaveExam(ExamDto examDto)
         {
-            IResult result = BusinessRules.Run(CheckAllQuestionsCreated(examDto));
+            IResult result = BusinessRules.Run(CheckAllQuestionsCreated(examDto), CheckQuestionHasAnswer(examDto));
 
             if (result != null)
             {
-                throw new Exception(result.Message);
+                return result;
             }
 
             _articleService.Add(examDto.Article);
@@ -86,6 +86,7 @@ namespace Business.Concrete
             Add(exam);
             foreach (var questionDto in examDto.Questions)
             {
+
                 Question question = new Question
                 {
                     ExamId = exam.ExamId,
@@ -94,7 +95,7 @@ namespace Business.Concrete
 
                 _questionService.Add(question);
 
-                    foreach (var answer in questionDto.Answers)
+                foreach (var answer in questionDto.Answers)
                 {
                     answer.QuestionId = question.QuestionId;
                     _answerService.Add(answer);
@@ -111,6 +112,18 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.QuestionCountNotFour);
             }
             return new SuccessResult();
+        }
+
+        private static IResult CheckQuestionHasAnswer(ExamDto exam)
+        {
+            foreach(var question in exam.Questions)
+            {
+                if (!question.Answers.Any(a => a.IsRight == true))
+                {
+                    return new ErrorResult(Messages.QuestionNotAnswered);
+                }
+            };
+            return new SuccessResult();            
         }
     }
 }

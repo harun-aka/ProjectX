@@ -1,13 +1,27 @@
-﻿@using Entities.DTOs
-@model List<ExamListDto>
+﻿@model List<Entities.DTOs.ExamListDto>
 
 @{
-    ViewBag.Title = "Exams";
+    ViewBag.Title = "Sınavlar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    string error = ViewBag.Error;
+} 
+                        @if (ViewBag.Error != "" && ViewBag.Error != null)
+                        {
+                            if (ViewBag.Success != true)
+                            {
+                                <div class="row">
+                                    <div class="alert alert-danger">
+                                        <strong>@ViewBag.Error</strong>
+                                    </div>
+
+                                </div>
+                            }
+                        }
 
     <div class="row">
-        <div class="col-12"><h2>Sınavlar</h2></div>
+        <div class="col-12"><h2>Exams</h2></div>
 
     </div>
     <div class="row">
@@ -42,11 +56,11 @@
                             @Html.DisplayFor(modelItem => item.ExamCreationDate)
                         </td>
                         <td>
-                            <a href="~/Exam/StartExam/@item.ExamId">Start Test</a>
+                            @Html.ActionLink("Start Exam", "StartExam", new { examId = item.ExamId })
                         </td>
                         <td>
 
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ExamId })
+                            @Html.ActionLink("Delete", "Delete", new { examId = item.ExamId })
                         </td>
                     </tr>
                 }

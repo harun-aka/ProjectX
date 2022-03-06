@@ -8,19 +8,20 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string AuthorizationDenied = "Yetkiniz yok.";
-        public static string ArticleAdded = "Makale eklendi.";
-        internal static string AnswerAdded;
-        internal static string AnswersListed;
-        internal static string ArticleListed;
-        internal static string QuestionAdded;
-        internal static string QuestionsListed;
-        internal static string ExamNotFound;
-        internal static string ExamDeleted;
-        internal static string ExamsListed;
-        internal static string ExamListed;
-        internal static string ExamAdded;
-        internal static string SaveExam;
-        internal static string QuestionCountNotFour;
+        public static string AuthorizationDenied = "Authorization Denied";
+        public static string ArticleAdded = "Article Added";
+        public static string AnswerAdded = "Answer Added";
+        public static string AnswersListed = "Answers Listed";
+        public static string ArticleListed = "Articles Listed";
+        public static string QuestionAdded = "Question Added";
+        public static string QuestionsListed = "Questions Listed";
+        public static string ExamNotFound = "Exam Not Found";
+        public static string ExamDeleted = "Exam Deleted";
+        public static string ExamsListed = "Exams Listed";
+        public static string ExamListed = "Exam Listed";
+        public static string ExamAdded = "Exam Added";
+        public static string SaveExam = "Exam Saved";
+        public static string QuestionCountNotFour = "Questions Count Not Four";
+        public static string QuestionNotAnswered = "Question Not Answered";
     }
 }
