@@ -4,7 +4,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfQuestionDal : EfEntityRepositoryBase<Question, NorthwindContext>, IQuestionDal
+    public class EfQuestionDal : EfEntityRepositoryBase<Question, ExamContext>, IQuestionDal
     { 
     }
 }

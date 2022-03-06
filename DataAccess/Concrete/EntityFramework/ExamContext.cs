@@ -7,11 +7,11 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class NorthwindContext : DbContext
+    public class ExamContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-5CCLDEP;Database=ForgeOfSouls;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer("ConnectionString");
         }
 
         public DbSet<Answer> Answers { get; set; }

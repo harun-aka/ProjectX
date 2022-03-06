@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 namespace DataAccess.Concrete.EntityFramework
 {
 
-    public class EfExamDal : EfEntityRepositoryBase<Exam, NorthwindContext>, IExamDal
+    public class EfExamDal : EfEntityRepositoryBase<Exam, ExamContext>, IExamDal
     {
         public ExamDto GetExamDetail(int examId)
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (ExamContext context = new ExamContext())
             {
                 var result = (from e   in context.Exams
                              join ar  in context.Articles on e.ArticleId equals ar.ArticleId
@@ -47,7 +47,7 @@ namespace DataAccess.Concrete.EntityFramework
 
     public List<ExamListDto> GetExamListDetails()
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (ExamContext context = new ExamContext())
             {
                 var result = (from e in context.Exams
                               join ar in context.Articles on e.ArticleId equals ar.ArticleId
